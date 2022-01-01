@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OccupationMicroservice.Interface;
-using OccupationMicroservice.Model; 
+using OccupationMicroservice.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,16 +22,28 @@ namespace OccupationMicroservice.Controllers
 
 
         [HttpGet]
-        public List<Occupation> GetAll()
+        public async Task<List<Occupation>> GetAll()
         {
-            return _occupationService.GetOccupations();
+            return await _occupationService.GetOccupations();
         }
 
         [HttpGet]
         [Route("{occupationId}/rating-factor")]
-        public decimal GetOccupationRatting(int occupationId)
+        public async Task<IActionResult> GetOccupationRatting(int occupationId)
         {
-            return _occupationService.GetOccupationRatingFactor(occupationId);
+            try
+            {
+                var result = await _occupationService.GetOccupationRatingFactor(occupationId);
+                return new OkObjectResult(result);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
         }
     }
 }

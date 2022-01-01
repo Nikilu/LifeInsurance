@@ -1,12 +1,13 @@
-﻿using OccupationMicroservice.Model; 
+﻿using OccupationMicroservice.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OccupationMicroservice.Interface
 {
-   public interface IOccupationService
+    public interface IOccupationService
     {
-        List<Occupation> GetOccupations();
+        Task<List<Occupation>> GetOccupations();
 
-        decimal GetOccupationRatingFactor(int id);
+        Task<decimal> GetOccupationRatingFactor(int id);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
-using OccupationMicroservice.Common;
-using OccupationMicroservice.Interface; 
+using Microsoft.EntityFrameworkCore; 
+using OccupationMicroservice.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OccupationMicroservice.Service
 {
@@ -12,25 +14,26 @@ namespace OccupationMicroservice.Service
         private readonly IMapper _mapper;
 
         public OccupationService(IOccupationContext dbContext, IMapper mapper)
-        { 
+        {
             _dbContext = dbContext;
             _mapper = mapper;
         }
 
 
-        public List<Model.Occupation> GetOccupations()
-        { 
-            var occupationList = _mapper.Map<List<Model.Occupation>>(_dbContext.Occupations.ToList());
+        public async Task<List<Model.Occupation>> GetOccupations()
+        {
+            var occupationList = _mapper.Map<List<Model.Occupation>>(await _dbContext.Occupations.ToListAsync());
+
             return occupationList;
         }
 
-        public decimal GetOccupationRatingFactor(int id)
+        public async Task<decimal> GetOccupationRatingFactor(int id)
         {
-            var occupationRating = _dbContext.OccupationRatings.Where(x => x.OccupationRatingId == id).FirstOrDefault();
+            var occupationRating = await _dbContext.OccupationRatings.Where(x => x.OccupationRatingId == id).FirstOrDefaultAsync();
             if (occupationRating != null)
                 return occupationRating.Factor;
             else
-                return Constants.DEFAULT_RATING_FACTOR;
-        } 
+                throw new InvalidOperationException(nameof(GetOccupationRatingFactor));
+        }
     }
 }

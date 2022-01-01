@@ -2,7 +2,6 @@
 using PremiumCalculationMicroservice.Interface;
 using PremiumCalculationMicroservice.Models;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace PremiumCalculationMicroservice.Controllers

@@ -25,16 +25,20 @@ namespace PremiumCalculation.Microservice.Tests.Service
         [Fact]
         public async void WhenAgeIsLessThanMinimum_ShouldThrowInvalidException()
         {
+            // Arrange
             var input = Fixture.Build<PremiumByOccupationInput>().With(p => p.DateOfBirth, DateTime.Now.Date).Create();
 
             var premiumCalculationService = new PremiumCalculationService(_mockOccupationService.Object);
 
+            // Act
+            // Assert
             await premiumCalculationService.CalculateYearlyDeathPremium(input).ShouldThrowAsync<InvalidOperationException>();
         }
 
         [Fact]
         public async void WhenOccupationIdIsInvalid_ShouldThrowInvalidException()
         {
+            // Arrange
             var occupationRatings = GetOccupationRatings();
             const int fakeOCcupationId = -1;
 
@@ -47,6 +51,8 @@ namespace PremiumCalculation.Microservice.Tests.Service
 
             var premiumCalculationService = new PremiumCalculationService(_mockOccupationService.Object);
 
+            // Act
+            // Assert
             await premiumCalculationService.CalculateYearlyDeathPremium(input).ShouldThrowAsync<InvalidOperationException>();
 
         }
@@ -54,6 +60,7 @@ namespace PremiumCalculation.Microservice.Tests.Service
         [Fact]
         public async void WhenOccupationIdIsValid_ShouldReturnDeathPremium()
         {
+            //Arrange
             var occupationRatings = GetOccupationRatings();
 
             var input = Fixture.Build<PremiumByOccupationInput>()
@@ -66,8 +73,10 @@ namespace PremiumCalculation.Microservice.Tests.Service
 
             var premiumCalculationService = new PremiumCalculationService(_mockOccupationService.Object);
 
+            // Act
             var result = await premiumCalculationService.CalculateYearlyDeathPremium(input);
 
+            // Assert
             result.ShouldBe(30.00m);
         }
 
