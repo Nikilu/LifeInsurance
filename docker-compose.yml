@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  premiummicroservice:
+    image: ${DOCKER_REGISTRY-}premiummicroservice
+    build:
+      context: .
+      dockerfile: PremiumMicroservice\Dockerfile

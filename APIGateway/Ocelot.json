@@ -1,0 +1,40 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/occupation",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "62353"
+        }
+      ],
+      "UpstreamPathTemplate": "/occupation",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/occupation/{occupationId}/rating-factor",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "62353"
+        }
+      ],
+      "UpstreamPathTemplate": "/occupation/{occupationId}/rating-factor",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/premium/death/yearly",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "65037"
+        }
+      ],
+      "UpstreamPathTemplate": "/premium/death/yearly",
+      "UpstreamHttpMethod": [ "POST" ]
+    } 
+  ]
+}
