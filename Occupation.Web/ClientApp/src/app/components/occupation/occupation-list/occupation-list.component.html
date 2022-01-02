@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">Occupation List</div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" sortable="name">Name</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="occupationList?.length != 0">
+        <tr *ngFor="let occupation of occupationList">
+          <th scope="row">{{ occupation.occupationId }}</th>
+          <td>{{ occupation.occupationName }}</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="occupationList?.length == 0">
+        No data!
+      </tbody>
+    </table>
+  </div>
+</div>

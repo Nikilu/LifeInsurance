@@ -1,0 +1,169 @@
+<div class="card">
+  <div class="card-header">Life Insurance Quote Tool</div>
+  <div class="card-body">
+    <form
+      [formGroup]="quoteToolForm"
+      class="p-5"
+      (ngSubmit)="calculatePremium()"
+    >
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="name">Name</label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="name"
+            type="text"
+            placeholder="Name (required)"
+            formControlName="name"
+            [ngClass]="{
+              'is-invalid':
+                (quoteToolForm.get('name')?.touched ||
+                  quoteToolForm.get('name')?.dirty) &&
+                !quoteToolForm.get('name')?.valid
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="quoteToolForm.get('name')?.errors?.required">
+              Please enter your first name.
+            </span>
+            <span *ngIf="quoteToolForm.get('name')?.errors?.maxlength">
+              The first name must be less than 50 characters.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="dateOfBirth">
+          Date of Birth</label
+        >
+        <div class="col-md-8">
+          <div class="form-group">
+            <div class="input-group">
+              <input
+                id="dateOfBirth"
+                class="form-control"
+                placeholder="dd/mm/yyyy"
+                name="dateOfBirth"
+                ngbDatepicker
+                formControlName="dateOfBirth"
+                (ngModelChange)="calculateAge()"
+                #d2="ngbDatepicker"
+                type="text"
+                [ngClass]="{
+                  'is-invalid':
+                    (quoteToolForm.get('dateOfBirth')?.touched ||
+                      quoteToolForm.get('dateOfBirth')?.dirty) &&
+                    !quoteToolForm.get('dateOfBirth')?.valid
+                }"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary calendar"
+                  (click)="d2.toggle()"
+                  type="button"
+                ></button>
+              </div>
+              <span class="invalid-feedback">
+                <span
+                  *ngIf="quoteToolForm.get('dateOfBirth')?.errors?.required"
+                >
+                  Please enter date of birth.
+                </span>
+                <span *ngIf="quoteToolForm.get('dateOfBirth')?.errors?.invalid">
+                  Please enter valid date of birth.
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"> Age </label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="age"
+            type="text"
+            [disabled]="true"
+            value="{{ age }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="coverAmount">
+          Sum Insured
+        </label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="coverAmount"
+            type="text"
+            placeholder="Sum Insured (required)"
+            formControlName="coverAmount"
+            [ngClass]="{
+              'is-invalid':
+                (quoteToolForm.get('coverAmount')?.touched ||
+                  quoteToolForm.get('coverAmount')?.dirty) &&
+                !quoteToolForm.get('coverAmount')?.valid
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="quoteToolForm.get('coverAmount')?.errors?.required">
+              Please enter sum Insured.
+            </span>
+            <span *ngIf="quoteToolForm.get('coverAmount')?.errors?.pattern">
+              Sum Insured should be valid numeric with 2 decimal place.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="occupationId">
+          Occupation</label
+        >
+        <div class="col-md-8">
+          <select
+            class="form-control"
+            id="occupationId"
+            formControlName="occupationId"
+            ngDefaultControl
+            (change)="calculatePremium()"
+          >
+            <option value="" disabled hidden>Select an option</option>
+            <option
+              *ngFor="let occupation of occupations"
+              [value]="occupation.occupationId"
+            >
+              {{ occupation.occupationName }}
+            </option>
+          </select>
+          <span class="invalid-feedback">
+            <span *ngIf="quoteToolForm.get('occupationId')?.errors?.required">
+              Please select your occupation.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button
+            type="submit"
+            [disabled]="!quoteToolForm.valid"
+            class="btn btn-primary"
+          >
+            Calculate Premium
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2" *ngif="deathPremium > 0">
+        <label class="col-md-2 col-form-label"> Death Premium </label>
+        <div class="col-md-8">
+          {{ deathPremium | currency }}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
