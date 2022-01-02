@@ -70,7 +70,11 @@
                 >
                   Please enter date of birth.
                 </span>
-                <span *ngIf="quoteToolForm.get('dateOfBirth')?.errors?.invalid">
+                <span
+                  *ngIf="
+                    quoteToolForm.get('dateOfBirth')?.errors?.ngbDate?.invalid
+                  "
+                >
                   Please enter valid date of birth.
                 </span>
               </span>
@@ -158,7 +162,7 @@
         </div>
       </div>
 
-      <div class="form-group row mb-2" *ngif="deathPremium > 0">
+      <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label"> Death Premium </label>
         <div class="col-md-8">
           {{ deathPremium | currency }}

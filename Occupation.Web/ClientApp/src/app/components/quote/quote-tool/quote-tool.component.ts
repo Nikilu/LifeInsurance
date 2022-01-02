@@ -201,10 +201,14 @@ export class QuoteToolComponent implements OnInit {
   }
 
   public async calculatePremium() {
-    this.updateQuoteInfo();
-    this.deathPremium = await this.premiumService.calculateYearlyDeathPremium(
-      this.quoteInfo
-    );
+    try {
+      this.updateQuoteInfo();
+      this.deathPremium = await this.premiumService.calculateYearlyDeathPremium(
+        this.quoteInfo
+      );
+    } catch (error) {
+      this.deathPremium = 0;
+    }
   }
 
   private updateQuoteInfo(): void {
