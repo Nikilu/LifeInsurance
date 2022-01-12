@@ -1,9 +1,9 @@
 # LifeInsurance
 Life Insurance Test with Web and Microservice with API Gateway
 
-AngularUI - AspNetCore - Microservices - API Gateway
-Angular front end AspNetCoreMicroservices with API Gateway.
+## AngularUI - AspNetCore - Microservices - API Gateway
 
+Angular front end AspNetCoreMicroservices with API Gateway.
 Windows10 Machine
 Visual Studio 2019  
 
@@ -46,7 +46,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-# ClientApp icroService & API Gateway 
+# MicroService & API Gateway 
 
 Rebuild Solution by right clicking on solution LifeInsurance.sln in Solution Explorer. Make sure solution Rebuild without any fail. It should Rebuild without any fail
 
@@ -54,7 +54,7 @@ In LifeInsurance solution property, Set Multiple Startup Projects. Select all pr
 
 Press F5 to debug, you can rebuild solution just to make sure it builds without any fail.
 
-URLs:
+## URLs:
 Angular UI:
 http://localhost:4200
 
