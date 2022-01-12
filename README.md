@@ -2,6 +2,9 @@
 Life Insurance Test with Web and Microservice with API Gateway
 
 ## Tech Stack
+* MicroService
+* API Gateway
+* .Net Core
 * AutoMapper 
 * NewtonsoftJson
 * AutoFixture
