@@ -1,6 +1,17 @@
 # LifeInsurance
 Life Insurance Test with Web and Microservice with API Gateway
 
+## Tech Stack
+AutoMapper 
+NewtonsoftJson
+AutoFixture
+Shouldly
+xunit
+AutoMapper
+Ocelot
+Angular 12
+Bootstrap
+
 ## AngularUI - AspNetCore - Microservices - API Gateway
 
 Angular front end AspNetCoreMicroservices with API Gateway.
